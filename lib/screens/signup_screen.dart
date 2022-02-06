@@ -1,11 +1,12 @@
-import 'dart:ffi';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:housing/resources/auth_methods.dart';
+import 'package:housing/responsive/mobile_screen-layout.dart';
+import 'package:housing/responsive/responsive_layout_screen.dart';
+import 'package:housing/responsive/web_screen_layout.dart';
+import 'package:housing/screens/login_screen.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:housing/utils/utils.dart';
-
 import 'package:housing/widgets/text_field_input.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,7 +23,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
-  bool _isLoading =false;
+  bool _isLoading = false;
   @override
   void dispose() {
     super.dispose();
@@ -41,7 +42,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void signUpUser() async {
     setState(() {
-      _isLoading=true;
+      _isLoading = true;
     });
     String res = await AuthMethod().signUpUser(
       email: _emailController.text,
@@ -51,11 +52,26 @@ class _SignupScreenState extends State<SignupScreen> {
       file: _image!,
     );
     setState(() {
-      _isLoading=false;
+      _isLoading = false;
     });
+
     if (res != 'succes') {
       showSnackBar(res, context);
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout(),
+          ),
+        ),
+      );
     }
+  }
+
+  void navigateToLogin() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
   @override
@@ -150,9 +166,13 @@ class _SignupScreenState extends State<SignupScreen> {
             InkWell(
                 onTap: signUpUser,
                 child: Container(
-                    child:_isLoading?const Center(child: CircularProgressIndicator(
-                      color: primaryColor,
-                    ),): const Text("Sign Up"),
+                    child: _isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: primaryColor,
+                            ),
+                          )
+                        : const Text("Sign Up"),
                     width: double.infinity,
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -165,25 +185,25 @@ class _SignupScreenState extends State<SignupScreen> {
               height: 12,
             ),
 
-            //Transitioning to signning in
-            /* Row(
+            //Transitioning to Log in
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  child: const Text("Dont't have an account?"),
+                  child: const Text("if you have an account?"),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
                 GestureDetector(
-                    onTap: () {},
+                    onTap: navigateToLogin,
                     child: Container(
                       child: const Text(
-                        " Sign up.",
+                        " Log in.",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ))
               ],
-            )*/
+            )
           ],
         ),
       )),

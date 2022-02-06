@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:housing/resources/auth_methods.dart';
-import 'package:housing/screens/home_screen.dart';
+import 'package:housing/responsive/mobile_screen-layout.dart';
+import 'package:housing/responsive/responsive_layout_screen.dart';
+import 'package:housing/responsive/web_screen_layout.dart';
+import 'package:housing/screens/signup_screen.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:housing/utils/utils.dart';
-
 import 'package:housing/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,13 +37,24 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text, password: _passwordController.text);
     if (res == "success") {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout(),
+          ),
+        ),
+      );
     } else {
       showSnackBar(res, context);
     }
     setState(() {
       _isLoading = false;
     });
+  }
+
+  void navigateToSignup() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => SignupScreen()));
   }
 
   @override
@@ -123,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
                 GestureDetector(
-                    onTap: () {},
+                    onTap: navigateToSignup,
                     child: Container(
                       child: const Text(
                         " Sign up.",
