@@ -1,3 +1,4 @@
+//import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:housing/resources/auth_methods.dart';
 import 'package:housing/responsive/mobile_screen-layout.dart';
@@ -9,10 +10,10 @@ import 'package:housing/utils/utils.dart';
 import 'package:housing/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     String res = await AuthMethod().loginUser(
         email: _emailController.text, password: _passwordController.text);
-    if (res == "success") {
+    if (res == 'success') {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
@@ -44,12 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       );
+      setState(() {
+        _isLoading = false;
+      });
     } else {
+      setState(() {
+        _isLoading = false;
+      });
       showSnackBar(res, context);
     }
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   void navigateToSignup() {
@@ -60,95 +64,133 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: blueColor,
         body: SafeArea(
-      child: SingleChildScrollView(
-          child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            //png image
-            const Image(
-              image: AssetImage('assets/images/4.png'),
-              height: 220,
-            ),
-            const SizedBox(
-              height: 64,
-            ),
-            //textfield email
-            TextFieldInbut(
-                iconTexfield: Icons.email,
-                textEditingController: _emailController,
-                hintText: "Enter your email",
-                textInputType: TextInputType.emailAddress),
-            const SizedBox(
-              height: 24,
-            ),
-            //texfield pass
-            TextFieldInbut(
-              iconTexfield: Icons.vpn_key_rounded,
-              textEditingController: _passwordController,
-              hintText: "Enter your password",
-              textInputType: TextInputType.visiblePassword,
-              ispass: ispass,
-            ),
-            //show pass
-            TextButton.icon(
-                onPressed: () {
-                  setState(() {
-                    ispass == true ? ispass = false : ispass = true;
-                    iconShowPass == Icons.remove_red_eye
-                        ? iconShowPass = Icons.remove_red_eye_outlined
-                        : iconShowPass = Icons.remove_red_eye;
-                  });
-                },
-                icon: Icon(iconShowPass),
-                label: const Text("Show Password")),
-            //button login
-            InkWell(
-                onTap: loginUser,
-                child: Container(
-                    child: _isLoading
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                            color: primaryColor,
-                          ))
-                        : const Text("log in"),
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: const ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(4))),
-                        color: blueColor))),
-
-            const SizedBox(
-              height: 100,
-            ),
-
-            //Transitioning to signning in
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          child: SingleChildScrollView(
+              child: Container(
+            // padding: const EdgeInsets.symmetric(horizontal: 32),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  child: const Text("Dont't have an account?"),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                ///
+                const SizedBox(
+                  height: 15,
                 ),
-                GestureDetector(
-                    onTap: navigateToSignup,
-                    child: Container(
-                      child: const Text(
-                        " Sign up.",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                //png image
+                ///
+                const Image(
+                  image: AssetImage('assets/images/4.png'),
+                  height: 220,
+                ),
+
+                ///
+                Container(
+                  padding: const EdgeInsets.all(35),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.all(Radius.circular(100))),
+                  child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      //textfield email
+                      TextFieldInbut(
+                          iconTexfield: Icons.email,
+                          textEditingController: _emailController,
+                          hintText: "Enter your email",
+                          textInputType: TextInputType.emailAddress),
+                      const SizedBox(
+                        height: 24,
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                    ))
+                      //texfield pass
+                      TextField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                            hintText: "Enter your password",
+                            border: OutlineInputBorder(
+                                borderSide: Divider.createBorderSide(context)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: Divider.createBorderSide(context)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: Divider.createBorderSide(context)),
+                            filled: true,
+                            contentPadding: const EdgeInsets.all(8),
+                            prefixIcon: const Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    ispass == true
+                                        ? ispass = false
+                                        : ispass = true;
+                                    iconShowPass == Icons.remove_red_eye
+                                        ? iconShowPass =
+                                            Icons.remove_red_eye_outlined
+                                        : iconShowPass = Icons.remove_red_eye;
+                                  });
+                                },
+                                icon: Icon(iconShowPass))),
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: ispass,
+                      ),
+
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      //button login
+                      InkWell(
+                          onTap: loginUser,
+                          child: Container(
+                              child: _isLoading
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                      color: primaryColor,
+                                    ))
+                                  : const Text("log in"),
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              decoration: const ShapeDecoration(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4))),
+                                  color: blueColor))),
+
+                      const SizedBox(
+                        height: 40,
+                      ),
+
+                      //Transitioning to signning in
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: const Text("Dont't have an account?"),
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                          ),
+                          GestureDetector(
+                              onTap: navigateToSignup,
+                              child: Container(
+                                child: const Text(
+                                  " Sign up.",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                              ))
+                        ],
+                      ),
+                      //
+                      /*  const SizedBox(
+                        height: 600,
+                      ), */
+                    ],
+                  ),
+                ),
               ],
-            )
-          ],
-        ),
-      )),
-    ));
+            ),
+          )),
+        ));
   }
 }
