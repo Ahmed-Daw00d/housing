@@ -7,7 +7,6 @@ import 'package:housing/responsive/mobile_screen-layout.dart';
 import 'package:housing/responsive/responsive_layout_screen.dart';
 import 'package:housing/responsive/web_screen_layout.dart';
 import 'package:housing/screens/login_screen.dart';
-import 'package:housing/screens/signup_screen.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:provider/provider.dart';
 

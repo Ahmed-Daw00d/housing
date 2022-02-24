@@ -44,6 +44,8 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       _isLoading = true;
     });
+
+    // signup user using our authmethodds
     String res = await AuthMethod().signUpUser(
       email: _emailController.text,
       password: _passwordController.text,
@@ -51,13 +53,13 @@ class _SignupScreenState extends State<SignupScreen> {
       bio: _bioController.text,
       file: _image!,
     );
-    setState(() {
-      _isLoading = false;
-    });
 
-    if (res != 'succes') {
-      showSnackBar(res, context);
-    } else {
+    // if string returned is sucess, user has been created
+    if (res == "success") {
+      setState(() {
+        _isLoading = false;
+      });
+      // navigate to the home screen
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
@@ -66,6 +68,12 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
       );
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      // show the error
+      showSnackBar(res, context);
     }
   }
 
@@ -77,7 +85,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: blueColor,
+        backgroundColor: fourdColor,
         body: SafeArea(
           child: SingleChildScrollView(
               child: Column(
@@ -94,7 +102,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       style: TextStyle(
                           fontSize: 38,
                           fontWeight: FontWeight.bold,
-                          color: primaryColor),
+                          color: thirdColor),
                     ),
                     const SizedBox(
                       height: 30,
@@ -128,7 +136,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               Container(
                 decoration: const BoxDecoration(
-                  color: Colors.black,
+                  color: thirdColor,
                   borderRadius:
                       BorderRadius.vertical(top: Radius.elliptical(150, 30)),
                 ),
@@ -178,7 +186,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         hintText: "Enter your bio",
                         textInputType: TextInputType.text),
                     const SizedBox(
-                      height: 64,
+                      height: 24,
                     ),
                     //button login
                     InkWell(
@@ -190,7 +198,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                       color: primaryColor,
                                     ),
                                   )
-                                : const Text("Sign Up"),
+                                : const Text(
+                                    "Sign Up",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                             width: double.infinity,
                             alignment: Alignment.center,
                             padding: const EdgeInsets.symmetric(vertical: 12),
@@ -198,10 +211,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4))),
-                                color: blueColor))),
+                                color: Color.fromARGB(190, 237, 201, 175)))),
 
                     const SizedBox(
-                      height: 15,
+                      height: 40,
                     ),
 
                     //Transitioning to Log in
@@ -209,7 +222,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          child: const Text("if you have an account?"),
+                          child: const Text(
+                            "if you have an account?",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
                           padding: const EdgeInsets.symmetric(vertical: 8),
                         ),
                         GestureDetector(
@@ -217,7 +235,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Container(
                               child: const Text(
                                 " Log in.",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 17),
                               ),
                               padding: const EdgeInsets.symmetric(vertical: 8),
                             ))

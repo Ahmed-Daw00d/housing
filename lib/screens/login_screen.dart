@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: blueColor,
+        backgroundColor: fourdColor,
         body: SafeArea(
           child: SingleChildScrollView(
               child: Container(
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.all(35),
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                      color: Colors.black,
+                      color: thirdColor,
                       borderRadius: BorderRadius.all(Radius.circular(100))),
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment.center,
@@ -140,22 +140,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       //button login
                       InkWell(
-                          onTap: loginUser,
-                          child: Container(
-                              child: _isLoading
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                      color: primaryColor,
-                                    ))
-                                  : const Text("log in"),
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              decoration: const ShapeDecoration(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4))),
-                                  color: blueColor))),
+                        onTap: loginUser,
+                        child: Container(
+                          child: _isLoading
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                  color: thirdColor,
+                                ))
+                              : const Text(
+                                  "log in",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: const ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4))),
+                            color: Color.fromARGB(190, 237, 201, 175),
+                          ),
+                        ),
+                      ),
 
                       const SizedBox(
                         height: 40,
@@ -166,7 +174,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            child: const Text("Dont't have an account?"),
+                            child: const Text(
+                              "Dont't have an account?",
+                              style: TextStyle(fontSize: 16),
+                            ),
                             padding: const EdgeInsets.symmetric(vertical: 8),
                           ),
                           GestureDetector(
@@ -174,17 +185,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Container(
                                 child: const Text(
                                   " Sign up.",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
                                 ),
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8),
                               ))
                         ],
                       ),
-                      //
-                      /*  const SizedBox(
-                        height: 600,
-                      ), */
                     ],
                   ),
                 ),
