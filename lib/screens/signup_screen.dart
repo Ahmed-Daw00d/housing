@@ -1,3 +1,4 @@
+//import 'dart:html';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:housing/resources/auth_methods.dart';
@@ -20,9 +21,10 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _bioController = TextEditingController();
+  String _bioController = "";
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  Uint8List? _IdImage;
   bool _isLoading = false;
   @override
   void dispose() {
@@ -30,7 +32,6 @@ class _SignupScreenState extends State<SignupScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _usernameController.dispose();
-    _bioController.dispose();
   }
 
   void selectImage() async {
@@ -40,19 +41,36 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
+  void selectIdImage() async {
+    Uint8List im = await pickImage(ImageSource.gallery);
+    setState(() {
+      _IdImage = im;
+    });
+  }
+
   void signUpUser() async {
     setState(() {
-      _isLoading = true;
+      if (_emailController.text.isEmpty ||
+          _passwordController.text.isEmpty ||
+          _usernameController.text.isEmpty ||
+          _bioController.isEmpty ||
+          _image!.isEmpty ||
+          _IdImage!.isEmpty) {
+        _isLoading = false;
+        showSnackBar("Please enter all data", context);
+      } else {
+        _isLoading = true;
+      }
     });
 
     // signup user using our authmethodds
     String res = await AuthMethod().signUpUser(
-      email: _emailController.text,
-      password: _passwordController.text,
-      username: _usernameController.text,
-      bio: _bioController.text,
-      file: _image!,
-    );
+        email: _emailController.text,
+        password: _passwordController.text,
+        username: _usernameController.text,
+        bio: _bioController,
+        file: _image!,
+        IdImage: _IdImage!);
 
     // if string returned is sucess, user has been created
     if (res == "success") {
@@ -144,108 +162,190 @@ class _SignupScreenState extends State<SignupScreen> {
                 width: double.infinity,
                 height: 500,
                 // this column about all textfield
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    //textfield username
-                    TextFieldInbut(
-                        iconTexfield: Icons.person,
-                        textEditingController: _usernameController,
-                        hintText: "Enter your username",
-                        textInputType: TextInputType.text),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    //textfield email
-                    TextFieldInbut(
-                        iconTexfield: Icons.email,
-                        textEditingController: _emailController,
-                        hintText: "Enter your email",
-                        textInputType: TextInputType.emailAddress),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    //texfield pass
-                    TextFieldInbut(
-                      iconTexfield: Icons.vpn_key_rounded,
-                      textEditingController: _passwordController,
-                      hintText: "Enter your password",
-                      textInputType: TextInputType.visiblePassword,
-                      ispass: false,
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    //textfield ti input pio
-                    TextFieldInbut(
-                        iconTexfield: Icons.person_add,
-                        textEditingController: _bioController,
-                        hintText: "Enter your bio",
-                        textInputType: TextInputType.text),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    //button login
-                    InkWell(
-                        onTap: signUpUser,
-                        child: Container(
-                            child: _isLoading
-                                ? const Center(
-                                    child: CircularProgressIndicator(
-                                      color: primaryColor,
-                                    ),
-                                  )
-                                : const Text(
-                                    "Sign Up",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            decoration: const ShapeDecoration(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(4))),
-                                color: Color.fromARGB(190, 237, 201, 175)))),
-
-                    const SizedBox(
-                      height: 40,
-                    ),
-
-                    //Transitioning to Log in
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: const Text(
-                            "if you have an account?",
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                        ),
-                        GestureDetector(
-                            onTap: navigateToLogin,
-                            child: Container(
-                              child: const Text(
-                                " Log in.",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 17),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      //textfield username
+                      TextFieldInbut(
+                          iconTexfield: Icons.person,
+                          textEditingController: _usernameController,
+                          hintText: "Enter your username",
+                          textInputType: TextInputType.text),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      //textfield email
+                      TextFieldInbut(
+                          iconTexfield: Icons.email,
+                          textEditingController: _emailController,
+                          hintText: "Enter your email",
+                          textInputType: TextInputType.emailAddress),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      //texfield pass
+                      TextFieldInbut(
+                        iconTexfield: Icons.vpn_key_rounded,
+                        textEditingController: _passwordController,
+                        hintText: "Enter your password",
+                        textInputType: TextInputType.visiblePassword,
+                        ispass: false,
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      //student or lessor
+                      Column(
+                        children: [
+                          //student
+                          Row(
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {
+                                  setState(() {
+                                    {
+                                      _bioController = "student";
+                                    }
+                                  });
+                                },
+                                icon: const Image(
+                                    width: 50,
+                                    height: 40,
+                                    image: AssetImage(
+                                        'assets/images/student.png')),
+                                label: const Text(
+                                  "student",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                            ))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ],
+
+                              const SizedBox(
+                                width: 50,
+                                child: Center(
+                                  child: Text(
+                                    "or",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: primaryColor),
+                                  ),
+                                ),
+                              ),
+
+                              //lessor
+                              TextButton.icon(
+                                  onPressed: () {
+                                    setState(() {
+                                      {
+                                        _bioController = "lessor";
+                                      }
+                                    });
+                                  },
+                                  icon: const Image(
+                                      width: 50,
+                                      height: 40,
+                                      image: AssetImage(
+                                          'assets/images/lessor.png')),
+                                  label: const Text(
+                                    "lessor",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ))
+                            ],
+                          ),
+                          //
+                          if (_bioController == "student")
+                            Column(
+                              children: [
+                                const Text("Enter your Student ID"),
+                                IconButton(
+                                    onPressed: selectIdImage,
+                                    icon: const Icon(Icons.assignment_ind))
+                              ],
+                            )
+                          else if (_bioController == "lessor")
+                            Column(
+                              children: [
+                                const Text("Enter your Personal ID"),
+                                IconButton(
+                                    onPressed: selectIdImage,
+                                    icon: const Icon(Icons.assignment_ind))
+                              ],
+                            ),
+                        ],
+                      ),
+                      //
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      //button signUp
+                      InkWell(
+                          onTap: signUpUser,
+                          child: Container(
+                              child: _isLoading
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        color: primaryColor,
+                                      ),
+                                    )
+                                  : const Text(
+                                      "Sign Up",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              decoration: const ShapeDecoration(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4))),
+                                  color: Color.fromARGB(190, 237, 201, 175)))),
+
+                      const SizedBox(
+                        height: 40,
+                      ),
+
+                      //Transitioning to Log in
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: const Text(
+                              "if you have an account?",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                          ),
+                          GestureDetector(
+                              onTap: navigateToLogin,
+                              child: Container(
+                                child: const Text(
+                                  " Log in.",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                              ))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

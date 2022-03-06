@@ -23,13 +23,15 @@ class AuthMethod {
     required String username,
     required String bio,
     required Uint8List file,
+    required Uint8List IdImage,
   }) async {
     String res = "Some error occurred";
     try {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
           username.isNotEmpty ||
-          bio.isNotEmpty) {
+          bio.isNotEmpty ||
+          IdImage.isEmpty) {
         //register user
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
@@ -38,6 +40,8 @@ class AuthMethod {
         //sent photo to storage photo
         String photoUrl = await StorageMethods()
             .uploadImageToStorage('profilePics', file, false);
+        String IdImageToString = await StorageMethods()
+            .uploadImageToStorage('profilePics', IdImage, false);
 
         // add user to our database
         model.User user = model.User(
@@ -48,6 +52,7 @@ class AuthMethod {
           followers: [],
           following: [],
           photoUrl: photoUrl,
+          IdImage: IdImageToString,
         );
         await _firestore.collection('users').doc(cred.user!.uid).set(
               user.toJson(),

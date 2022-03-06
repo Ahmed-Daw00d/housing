@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:housing/screens/add_post_screen.dart';
 import 'package:housing/screens/login_screen.dart';
+import 'package:housing/screens/profile.dart';
 import 'package:housing/utils/colors.dart';
+import 'package:housing/utils/global_variables.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
@@ -37,27 +40,8 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // delet
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => LoginScreen()));
-            },
-          ),
-        ],
-      ),
-      //
       body: PageView(
-        children: const [
-          Center(child: Text("home")),
-          Center(child: Text("add")),
-          Center(child: Text("search")),
-          Center(child: Text("favorite")),
-          Center(child: Text("profile")),
-        ],
+        children: homeScreenItems,
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: onPageChanged,
