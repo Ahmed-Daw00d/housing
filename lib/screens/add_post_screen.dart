@@ -28,7 +28,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
   final TextEditingController _specialMarkController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
 //
+
+  bool _isloading = false;
+
   void postImage(String uid, String username, String profImage) async {
+    setState(() {
+      _isloading = true;
+    });
     try {
       String res = await FirestoreMethods().uploadPost(
         _descriptionController.text,
@@ -45,8 +51,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
       );
 
       if (res == "success") {
-        showSnackBar('Posted!', context);
+        setState(() {
+          _isloading = false;
+        });
+        showSnackBar('Posted', context);
+        clearImage();
       } else {
+        setState(() {
+          _isloading = false;
+        });
         showSnackBar(res, context);
       }
     } catch (e) {
@@ -97,6 +110,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
     );
   }
 
+  //
+  void clearImage() {
+    setState(() {
+      _file = null;
+    });
+  }
+
   @override
   //
   void dispose() {
@@ -132,7 +152,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               backgroundColor: thirdColor,
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () {},
+                onPressed: clearImage,
               ),
               title: const Text("Post to"),
               centerTitle: false,
@@ -154,6 +174,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
+                  _isloading
+                      ? const LinearProgressIndicator()
+                      : const Padding(padding: EdgeInsets.only(top: 0)),
+                  const Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
