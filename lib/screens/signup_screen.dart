@@ -97,7 +97,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void navigateToLogin() {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+        .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 
   @override
@@ -116,8 +116,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   children: [
                     //register text
                     const Text(
-                      "Register",
+                      "Housing",
                       style: TextStyle(
+                          fontFamily: "cursive",
                           fontSize: 38,
                           fontWeight: FontWeight.bold,
                           color: thirdColor),

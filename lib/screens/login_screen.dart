@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void navigateToSignup() {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => SignupScreen()));
+        .push(MaterialPageRoute(builder: (context) => const SignupScreen()));
   }
 
   @override
@@ -67,8 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: fourdColor,
         body: SafeArea(
           child: SingleChildScrollView(
-              child: Container(
-            // padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,10 +77,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 15,
                 ),
                 //png image
-                ///
-                const Image(
-                  image: AssetImage('assets/images/4.png'),
-                  height: 220,
+                Stack(
+                  children: const [
+                    Image(
+                      image: AssetImage('assets/images/4.png'),
+                      height: 220,
+                    ),
+                    Positioned(
+                      bottom: 60,
+                      right: 130,
+                      child: Text(
+                        "Housing",
+                        style: TextStyle(
+                            fontFamily: "cursive",
+                            fontSize: 42,
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor),
+                      ),
+                    ),
+                  ],
                 ),
 
                 ///
