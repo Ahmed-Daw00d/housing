@@ -9,6 +9,8 @@ import 'package:housing/responsive/web_screen_layout.dart';
 import 'package:housing/screens/login_screen.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:provider/provider.dart';
+//
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,8 +44,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Housing ',
-        /* theme: ThemeData.dark()
-            .copyWith(scaffoldBackgroundColor: mobileBackgroundColor), */
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
@@ -65,7 +65,13 @@ class MyApp extends StatelessWidget {
                 ),
               );
             }
-            return LoginScreen();
+            return AnimatedSplashScreen(
+              splash: Image.asset("assets/images/3.png"),
+              splashIconSize: 300,
+              nextScreen: const LoginScreen(),
+              splashTransition: SplashTransition.scaleTransition,
+              backgroundColor: Color.fromARGB(255, 240, 146, 59),
+            );
           },
         ),
       ),
