@@ -58,35 +58,35 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                   icon: Icon(Icons.home,
                       color: (_page == 0) ? blueColor : secondaryColor),
                   label: "",
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
                 //1 add post
                 BottomNavigationBarItem(
                   icon: Icon(Icons.search,
                       color: (_page == 1) ? blueColor : secondaryColor),
                   label: "search",
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
                 //2
                 BottomNavigationBarItem(
                   icon: Icon(Icons.favorite,
                       color: (_page == 2) ? blueColor : secondaryColor),
                   label: "favorite",
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
                 //3
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person,
                       color: (_page == 3) ? blueColor : secondaryColor),
                   label: 'profile',
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
                 //4
                 BottomNavigationBarItem(
                   icon: Icon(Icons.add_circle,
                       color: (_page == 4) ? blueColor : secondaryColor),
                   label: "Add post",
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
               ],
               onTap: navigationTapped,
@@ -98,28 +98,28 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                   icon: Icon(Icons.home,
                       color: (_page == 0) ? blueColor : secondaryColor),
                   label: "",
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
                 //1 add post
                 BottomNavigationBarItem(
                   icon: Icon(Icons.search,
                       color: (_page == 1) ? blueColor : secondaryColor),
                   label: "search",
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
                 //2
                 BottomNavigationBarItem(
                   icon: Icon(Icons.favorite,
                       color: (_page == 2) ? blueColor : secondaryColor),
                   label: "favorite",
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
                 //3
                 BottomNavigationBarItem(
                   icon: Icon(Icons.person,
                       color: (_page == 3) ? blueColor : secondaryColor),
                   label: 'profile',
-                  backgroundColor: mobileBackgroundColor,
+                  backgroundColor: fourdColor,
                 ),
               ],
               onTap: navigationTapped,
