@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
               splashIconSize: 300,
               nextScreen: const LoginScreen(),
               splashTransition: SplashTransition.scaleTransition,
-              backgroundColor: Color.fromARGB(255, 240, 146, 59),
+              backgroundColor: const Color.fromARGB(255, 240, 146, 59),
             );
           },
         ),
