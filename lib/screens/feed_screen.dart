@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:housing/models/user.dart';
@@ -15,6 +13,7 @@ class FeedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     User user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
+      backgroundColor: fourdColor,
       appBar: AppBar(
         backgroundColor: thirdColor,
         centerTitle: false,

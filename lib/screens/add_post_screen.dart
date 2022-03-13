@@ -19,6 +19,11 @@ class AddPostScreen extends StatefulWidget {
 class _AddPostScreenState extends State<AddPostScreen> {
   //
   Uint8List? _file;
+
+  ///
+  Uint8List? _file2;
+  Uint8List? _file3;
+  Uint8List? _file4;
   //
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _neighborhoodController = TextEditingController();
@@ -37,18 +42,20 @@ class _AddPostScreenState extends State<AddPostScreen> {
     });
     try {
       String res = await FirestoreMethods().uploadPost(
-        _descriptionController.text,
-        _neighborhoodController.text,
-        _adjacentController.text,
-        _buildingController.text,
-        _apartmentController.text,
-        _specialMarkController.text,
-        _priceController.text,
-        _file,
-        uid,
-        username,
-        profImage,
-      );
+          _descriptionController.text,
+          _neighborhoodController.text,
+          _adjacentController.text,
+          _buildingController.text,
+          _apartmentController.text,
+          _specialMarkController.text,
+          _priceController.text,
+          _file,
+          uid,
+          username,
+          profImage,
+          _file2,
+          _file3,
+          _file4);
 
       if (res == "success") {
         setState(() {
@@ -81,9 +88,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 onPressed: () async {
                   Navigator.pop(context);
                   Uint8List file = await pickImage(ImageSource.camera);
+                  Uint8List file2 = await pickImage(ImageSource.camera);
+                  Uint8List file3 = await pickImage(ImageSource.camera);
+                  Uint8List file4 = await pickImage(ImageSource.camera);
 
                   setState(() {
                     _file = file;
+                    _file2 = file2;
+                    _file3 = file3;
+                    _file4 = file4;
                   });
                 }),
             SimpleDialogOption(
@@ -92,9 +105,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 onPressed: () async {
                   Navigator.of(context).pop();
                   Uint8List file = await pickImage(ImageSource.gallery);
+                  Uint8List file2 = await pickImage(ImageSource.gallery);
+                  Uint8List file3 = await pickImage(ImageSource.gallery);
+                  Uint8List file4 = await pickImage(ImageSource.gallery);
 
                   setState(() {
                     _file = file;
+                    _file2 = file2;
+                    _file3 = file3;
+                    _file4 = file4;
                   });
                 }),
             SimpleDialogOption(
@@ -114,6 +133,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
   void clearImage() {
     setState(() {
       _file = null;
+      _file2 = null;
+      _file3 = null;
+      _file4 = null;
     });
   }
 
@@ -224,23 +246,87 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                   hintText: "Price....(السعر)",
                                   maxLines: 1),
 
+                              const Divider(),
+
                               //Image   صور الشقه
-                              SizedBox(
-                                height: 220,
-                                width: 320,
-                                child: AspectRatio(
-                                  aspectRatio: 487 / 451,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: MemoryImage(_file!),
-                                          fit: BoxFit.fill,
-                                          alignment:
-                                              FractionalOffset.topCenter),
+
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 220,
+                                    width: 320,
+                                    child: AspectRatio(
+                                      aspectRatio: 487 / 451,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: MemoryImage(_file!),
+                                              fit: BoxFit.fill,
+                                              alignment:
+                                                  FractionalOffset.topCenter),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  const Divider(),
+
+                                  ///
+                                  //image 2
+                                  SizedBox(
+                                    height: 220,
+                                    width: 320,
+                                    child: AspectRatio(
+                                      aspectRatio: 487 / 451,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: MemoryImage(_file2!),
+                                              fit: BoxFit.fill,
+                                              alignment:
+                                                  FractionalOffset.topCenter),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const Divider(),
+                                  //image3
+                                  SizedBox(
+                                    height: 220,
+                                    width: 320,
+                                    child: AspectRatio(
+                                      aspectRatio: 487 / 451,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: MemoryImage(_file3!),
+                                              fit: BoxFit.fill,
+                                              alignment:
+                                                  FractionalOffset.topCenter),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const Divider(),
+                                  //  image4
+                                  SizedBox(
+                                    height: 220,
+                                    width: 320,
+                                    child: AspectRatio(
+                                      aspectRatio: 487 / 451,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: MemoryImage(_file4!),
+                                              fit: BoxFit.fill,
+                                              alignment:
+                                                  FractionalOffset.topCenter),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
+
                               const SizedBox(
                                 height: 10,
                               ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:housing/models/user.dart';
 import 'package:housing/providers/user_provider.dart';
+import 'package:housing/resources/firestore_methods.dart';
+import 'package:housing/screens/comment_screen.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:housing/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +23,7 @@ class _PostCardState extends State<PostCard> {
   Widget build(BuildContext context) {
     final User user = Provider.of<UserProvider>(context).getUser;
     return Container(
-      color: thirdColor,
+      color: fourdColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
@@ -82,7 +85,12 @@ class _PostCardState extends State<PostCard> {
           ),
           //Image section
           GestureDetector(
-            onDoubleTap: () {
+            onDoubleTap: () async {
+              await FirestoreMethods().likePost(
+                widget.snap['postId'],
+                user.uid,
+                widget.snap['likes'],
+              );
               setState(() {
                 isLikeAnimating = true;
               });
@@ -91,13 +99,43 @@ class _PostCardState extends State<PostCard> {
               alignment: Alignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  width: double.infinity,
-                  child: Image.network(
-                    widget.snap["postUrl"],
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                    height: MediaQuery.of(context).size.height * 0.35,
+                    width: double.infinity,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Image.network(
+                            widget.snap["postUrl"],
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(
+                            child: Icon(Icons.east_rounded),
+                          ),
+                          //
+                          Image.network(
+                            widget.snap["postUrl2"],
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(
+                            child: Icon(Icons.east_rounded),
+                          ),
+                          //
+                          Image.network(
+                            widget.snap["postUrl3"],
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(
+                            child: Icon(Icons.east_rounded),
+                          ),
+                          //
+                          Image.network(
+                            widget.snap["postUrl4"],
+                            fit: BoxFit.cover,
+                          ),
+                        ],
+                      ),
+                    )),
                 AnimatedOpacity(
                   duration: const Duration(milliseconds: 100),
                   opacity: isLikeAnimating ? 1 : 0,
@@ -119,6 +157,7 @@ class _PostCardState extends State<PostCard> {
               ],
             ),
           ),
+
           //Like comment section
           Row(
             children: [
@@ -126,15 +165,29 @@ class _PostCardState extends State<PostCard> {
                 isAnimating: widget.snap['likes'].contains(user.uid),
                 smallLike: true,
                 child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
+                  onPressed: () async {
+                    await FirestoreMethods().likePost(
+                      widget.snap['postId'],
+                      user.uid,
+                      widget.snap['likes'],
+                    );
+                  },
+                  icon: widget.snap['likes'].contains(user.uid)
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )
+                      : const Icon(
+                          Icons.favorite_border,
+                        ),
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CommentsScreen(
+                    postId: widget.snap['postId'].toString(),
+                  ),
+                )),
                 icon: const Icon(
                   Icons.comment_outlined,
                 ),
