@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 import 'package:housing/models/user.dart';
 import 'package:housing/providers/user_provider.dart';
@@ -220,10 +221,14 @@ class _PostCardState extends State<PostCard> {
                   Icons.comment_outlined,
                 ),
               ),
+              //
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await FlutterPhoneDirectCaller.callNumber(
+                      widget.snap['number']);
+                },
                 icon: const Icon(
-                  Icons.send,
+                  Icons.phone,
                 ),
               ),
               Expanded(
@@ -237,6 +242,7 @@ class _PostCardState extends State<PostCard> {
                   ),
                 ),
               ),
+              //
             ],
           ),
           //Description and number of comments

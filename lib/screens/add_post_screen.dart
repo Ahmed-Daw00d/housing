@@ -32,6 +32,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
   final TextEditingController _apartmentController = TextEditingController();
   final TextEditingController _specialMarkController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
+//number
+  final TextEditingController _numberController = TextEditingController();
 //
 
   bool _isloading = false;
@@ -55,7 +57,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
           profImage,
           _file2,
           _file3,
-          _file4);
+          _file4,
+          _numberController.text);
 
       if (res == "success") {
         setState(() {
@@ -180,8 +183,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
               centerTitle: false,
               actions: [
                 TextButton(
-                  onPressed: () =>
-                      postImage(user.uid, user.username, user.photoUrl),
+                  onPressed: () {
+                    postImage(user.uid, user.username, user.photoUrl);
+                    showSnackBar(
+                        "جاري الرفع برجاء الانتظار حتي تمام التحميل ", context);
+                  },
                   child: const Text(
                     "post",
                     style: TextStyle(
@@ -245,6 +251,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                   textEditingController: _priceController,
                                   hintText: "Price....(السعر)",
                                   maxLines: 1),
+                              //number
+                              TextFieldPost(
+                                  hintText: "رقم التواصل",
+                                  maxLines: 1,
+                                  textEditingController: _numberController),
 
                               const Divider(),
 

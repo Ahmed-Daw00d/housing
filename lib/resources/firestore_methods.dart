@@ -22,6 +22,8 @@ class FirestoreMethods {
     var file2,
     var file3,
     var file4,
+    //number
+    String number,
   ) async {
     String res = "some error occurred";
 
@@ -56,6 +58,8 @@ class FirestoreMethods {
         postUrl2: photoUrl2,
         postUrl3: photoUrl3,
         postUrl4: photoUrl4,
+        //number
+        number: number,
       );
 
       _firestore.collection("posts").doc(postId).set(post.toJson());
@@ -126,5 +130,34 @@ class FirestoreMethods {
       res = err.toString();
     }
     return res;
+  }
+
+  //
+  Future<void> followUser(String uid, String followId) async {
+    try {
+      DocumentSnapshot snap =
+          await _firestore.collection('users').doc(uid).get();
+      List following = (snap.data()! as dynamic)['following'];
+
+      if (following.contains(followId)) {
+        await _firestore.collection('users').doc(followId).update({
+          'followers': FieldValue.arrayRemove([uid])
+        });
+
+        await _firestore.collection('users').doc(uid).update({
+          'following': FieldValue.arrayRemove([followId])
+        });
+      } else {
+        await _firestore.collection('users').doc(followId).update({
+          'followers': FieldValue.arrayUnion([uid])
+        });
+
+        await _firestore.collection('users').doc(uid).update({
+          'following': FieldValue.arrayUnion([followId])
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

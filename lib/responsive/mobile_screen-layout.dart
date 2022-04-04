@@ -68,23 +68,17 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                   backgroundColor: fourdColor,
                 ),
                 //2
+
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite,
+                  icon: Icon(Icons.person,
                       color: (_page == 2) ? blueColor : secondaryColor),
-                  label: "favorite",
+                  label: 'profile',
                   backgroundColor: fourdColor,
                 ),
                 //3
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.person,
-                      color: (_page == 3) ? blueColor : secondaryColor),
-                  label: 'profile',
-                  backgroundColor: fourdColor,
-                ),
-                //4
-                BottomNavigationBarItem(
                   icon: Icon(Icons.add_circle,
-                      color: (_page == 4) ? blueColor : secondaryColor),
+                      color: (_page == 3) ? blueColor : secondaryColor),
                   label: "Add post",
                   backgroundColor: fourdColor,
                 ),
@@ -109,15 +103,8 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
                 ),
                 //2
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite,
-                      color: (_page == 2) ? blueColor : secondaryColor),
-                  label: "favorite",
-                  backgroundColor: fourdColor,
-                ),
-                //3
-                BottomNavigationBarItem(
                   icon: Icon(Icons.person,
-                      color: (_page == 3) ? blueColor : secondaryColor),
+                      color: (_page == 2) ? blueColor : secondaryColor),
                   label: 'profile',
                   backgroundColor: fourdColor,
                 ),

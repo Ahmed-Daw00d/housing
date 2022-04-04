@@ -19,6 +19,8 @@ class Post {
   final String postUrl2;
   final String postUrl3;
   final String postUrl4;
+//number
+  final String number;
 
   const Post({
     required this.adjacent,
@@ -39,6 +41,8 @@ class Post {
     required this.postUrl2,
     required this.postUrl3,
     required this.postUrl4,
+    //number
+    required this.number,
   });
 
   Map<String, dynamic> toJson() => {
@@ -60,6 +64,8 @@ class Post {
         'postUrl2': postUrl2,
         'postUrl3': postUrl3,
         'postUrl4': postUrl4,
+        //number
+        'number': number,
       };
 
   static Post fromSnap(DocumentSnapshot snap) {
@@ -83,6 +89,8 @@ class Post {
       postUrl2: snapshot['postUrl2'],
       postUrl3: snapshot['postUrl3'],
       postUrl4: snapshot['postUrl4'],
+      //number
+      number: snapshot['number'],
     );
   }
 }
