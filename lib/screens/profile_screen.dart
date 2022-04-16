@@ -75,6 +75,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 userData['username'],
               ),
               centerTitle: false,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.more_vert_sharp),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                              child: ListView(
+                                shrinkWrap: true,
+                                children: [
+                                  TextButton.icon(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.edit_sharp),
+                                      label: const Text("edit_profile")),
+                                  TextButton.icon(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.edit_sharp),
+                                      label: const Text("edit_profile")),
+                                  FollowButton(
+                                    text: 'Sign Out',
+                                    backgroundColor: mobileBackgroundColor,
+                                    textColor: primaryColor,
+                                    borderColor: Colors.grey,
+                                    function: () async {
+                                      await AuthMethod().signOut();
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen(),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                ],
+                              ),
+                            ));
+                  },
+                ),
+              ],
             ),
             body: ListView(
               children: [
@@ -110,23 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   children: [
                                     FirebaseAuth.instance.currentUser!.uid ==
                                             widget.uid
-                                        ? FollowButton(
-                                            text: 'Sign Out',
-                                            backgroundColor:
-                                                mobileBackgroundColor,
-                                            textColor: primaryColor,
-                                            borderColor: Colors.grey,
-                                            function: () async {
-                                              await AuthMethod().signOut();
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const LoginScreen(),
-                                                ),
-                                              );
-                                            },
-                                          )
+                                        ? const SizedBox()
                                         : isFollowing
                                             ? FollowButton(
                                                 text: 'Unfollow',

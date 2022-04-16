@@ -10,6 +10,7 @@ import 'package:housing/utils/colors.dart';
 import 'package:housing/utils/utils.dart';
 import 'package:housing/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
+
 import 'package:provider/provider.dart';
 
 class PostCard extends StatefulWidget {
@@ -137,6 +138,8 @@ class _PostCardState extends State<PostCard> {
                           Image.network(
                             widget.snap["postUrl"],
                             fit: BoxFit.cover,
+                            gaplessPlayback: true,
+                            filterQuality: FilterQuality.high,
                           ),
                           const SizedBox(
                             child: Icon(Icons.east_rounded),
