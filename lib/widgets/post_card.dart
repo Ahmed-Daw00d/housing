@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-
 import 'package:housing/models/user.dart';
 import 'package:housing/providers/user_provider.dart';
 import 'package:housing/resources/firestore_methods.dart';
@@ -10,7 +9,6 @@ import 'package:housing/utils/colors.dart';
 import 'package:housing/utils/utils.dart';
 import 'package:housing/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
-
 import 'package:provider/provider.dart';
 
 class PostCard extends StatefulWidget {
