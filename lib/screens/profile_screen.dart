@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:housing/resources/auth_methods.dart';
 import 'package:housing/resources/firestore_methods.dart';
+import 'package:housing/screens/aboutUs.dart';
 import 'package:housing/screens/login_screen.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:housing/utils/utils.dart';
@@ -89,10 +90,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       onPressed: () {},
                                       icon: const Icon(Icons.edit_sharp),
                                       label: const Text("edit_profile")),
+                                  //about us
                                   TextButton.icon(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                fullscreenDialog: true,
+                                                builder: (context) =>
+                                                    const AboutUs()));
+                                      },
                                       icon: const Icon(Icons.edit_sharp),
-                                      label: const Text("edit_profile")),
+                                      label: const Text("about us")),
+
                                   FollowButton(
                                     text: 'Sign Out',
                                     backgroundColor: mobileBackgroundColor,
