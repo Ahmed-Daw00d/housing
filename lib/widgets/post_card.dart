@@ -10,6 +10,7 @@ import 'package:housing/utils/utils.dart';
 import 'package:housing/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_launch/flutter_launch.dart';
 
 class PostCard extends StatefulWidget {
   final snap;
@@ -112,6 +113,7 @@ class _PostCardState extends State<PostCard> {
             ),
           ),
           //Image section
+          ////
           GestureDetector(
             onDoubleTap: () async {
               await FirestoreMethods().likePost(
@@ -123,71 +125,48 @@ class _PostCardState extends State<PostCard> {
                 isLikeAnimating = true;
               });
             },
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.35,
-                    width: double.infinity,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          Image.network(
-                            widget.snap["postUrl"],
-                            fit: BoxFit.cover,
-                            gaplessPlayback: true,
-                            filterQuality: FilterQuality.high,
-                          ),
-                          const SizedBox(
-                            child: Icon(Icons.east_rounded),
-                          ),
-                          //
-                          Image.network(
-                            widget.snap["postUrl2"],
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(
-                            child: Icon(Icons.east_rounded),
-                          ),
-                          //
-                          Image.network(
-                            widget.snap["postUrl3"],
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(
-                            child: Icon(Icons.east_rounded),
-                          ),
-                          //
-                          Image.network(
-                            widget.snap["postUrl4"],
-                            fit: BoxFit.cover,
-                          ),
-                        ],
+            child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.35,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Image.network(
+                        widget.snap["postUrl"],
+                        fit: BoxFit.cover,
+                        gaplessPlayback: true,
+                        filterQuality: FilterQuality.high,
                       ),
-                    )),
-                AnimatedOpacity(
-                  duration: const Duration(milliseconds: 100),
-                  opacity: isLikeAnimating ? 1 : 0,
-                  child: LikeAnimation(
-                    child: const Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                      size: 120,
-                    ),
-                    isAnimating: isLikeAnimating,
-                    duration: const Duration(milliseconds: 400),
-                    onEnd: () {
-                      setState(() {
-                        isLikeAnimating = false;
-                      });
-                    },
+                      const SizedBox(
+                        child: Icon(Icons.east_rounded),
+                      ),
+                      //
+                      Image.network(
+                        widget.snap["postUrl2"],
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(
+                        child: Icon(Icons.east_rounded),
+                      ),
+                      //
+                      Image.network(
+                        widget.snap["postUrl3"],
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(
+                        child: Icon(Icons.east_rounded),
+                      ),
+                      //
+                      Image.network(
+                        widget.snap["postUrl4"],
+                        fit: BoxFit.cover,
+                      ),
+                    ],
                   ),
-                )
-              ],
-            ),
+                )),
           ),
-
+////
           //Like comment section
           Row(
             children: [
@@ -222,6 +201,14 @@ class _PostCardState extends State<PostCard> {
                   Icons.comment_outlined,
                 ),
               ),
+              IconButton(
+                  onPressed: () async {
+                    await FlutterLaunch.launchWhatsapp(
+                        phone: "+2${widget.snap['number']}",
+                        message:
+                            "بكلم حضرتك بخصوص الشق المعروضع علي برنامج hosing");
+                  },
+                  icon: Image.asset('assets/images/7.png')),
               //
               IconButton(
                 onPressed: () async {
