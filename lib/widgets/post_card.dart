@@ -127,7 +127,7 @@ class _PostCardState extends State<PostCard> {
                 return Material(
                   borderRadius: BorderRadius.circular(40),
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: blueColor,
+                  color: fourdColor,
                   elevation: 8,
                   child: SizedBox(
                       child: ListView(

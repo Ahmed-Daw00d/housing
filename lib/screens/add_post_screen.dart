@@ -222,38 +222,36 @@ class _AddPostScreenState extends State<AddPostScreen> {
                               //the data for the apartment  البيانات بتاعت الشقه
                               TextFieldPost(
                                   textEditingController: _descriptionController,
-                                  hintText: "ًWrite a caption....(التفاصيل)",
+                                  hintText: "ً....(التفاصيل)",
                                   maxLines: 8),
                               TextFieldPost(
                                   textEditingController:
                                       _neighborhoodController,
-                                  hintText: "The neighborhood....(الحي)",
+                                  hintText: "....(الحي)",
                                   maxLines: 1),
                               TextFieldPost(
                                   textEditingController: _adjacentController,
-                                  hintText: "The adjacent....(المجاوره)",
+                                  hintText: "....(المجاوره)",
                                   maxLines: 1),
                               TextFieldPost(
                                   textEditingController: _buildingController,
-                                  hintText:
-                                      "The building number....(رقم العماره)",
+                                  hintText: "....(رقم العماره)",
                                   maxLines: 1),
                               TextFieldPost(
                                   textEditingController: _apartmentController,
-                                  hintText: "Apartment number....(رقم الشقه)",
+                                  hintText: "....(رقم الشقه)",
                                   maxLines: 1),
                               TextFieldPost(
                                   textEditingController: _specialMarkController,
-                                  hintText:
-                                      "A special place or mark....(علامه مميزه)",
+                                  hintText: "....(علامه مميزه)",
                                   maxLines: 1),
                               TextFieldPost(
                                   textEditingController: _priceController,
-                                  hintText: "Price....(السعر)",
+                                  hintText: "....(السعر)",
                                   maxLines: 1),
                               //number
                               TextFieldPost(
-                                  hintText: "رقم التواصل",
+                                  hintText: "....رقم التواصل",
                                   maxLines: 1,
                                   textEditingController: _numberController),
 
