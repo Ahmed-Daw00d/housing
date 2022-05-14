@@ -4,6 +4,7 @@ import 'package:housing/resources/auth_methods.dart';
 import 'package:housing/responsive/mobile_screen-layout.dart';
 import 'package:housing/responsive/responsive_layout_screen.dart';
 import 'package:housing/responsive/web_screen_layout.dart';
+import 'package:housing/screens/forget_pass.dart';
 import 'package:housing/screens/signup_screen.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:housing/utils/utils.dart';
@@ -37,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await AuthMethod().loginUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success') {
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
@@ -59,6 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void navigateToSignup() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const SignupScreen()));
+  }
+
+  void navigateToForgetpass() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const Forgetpass()));
   }
 
   @override
@@ -156,6 +163,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       InkWell(
                         onTap: loginUser,
                         child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: const ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4))),
+                            color: Color.fromARGB(190, 237, 201, 175),
+                          ),
                           child: _isLoading
                               ? const Center(
                                   child: CircularProgressIndicator(
@@ -167,44 +183,59 @@ class _LoginScreenState extends State<LoginScreen> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                 ),
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          decoration: const ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4))),
-                            color: Color.fromARGB(190, 237, 201, 175),
-                          ),
                         ),
                       ),
 
                       const SizedBox(
                         height: 40,
                       ),
-
+//Transitioning to forgetpass
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: const Text(
+                              "If you forgot your password?",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          GestureDetector(
+                              onTap: navigateToForgetpass,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: const Text(
+                                  " Forgot pass .",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                ),
+                              ))
+                        ],
+                      ),
                       //Transitioning to signning in
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
                             child: const Text(
                               "Dont't have an account?",
                               style: TextStyle(fontSize: 16),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 8),
                           ),
                           GestureDetector(
                               onTap: navigateToSignup,
                               child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
                                 child: const Text(
                                   " Sign up.",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
                                 ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
                               ))
                         ],
                       ),

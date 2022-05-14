@@ -38,9 +38,9 @@ class _SearchScreenState extends State<SearchScreen> {
       body: isShowUsers
           ? FutureBuilder(
               future: FirebaseFirestore.instance
-                  .collection('users')
+                  .collection('posts')
                   .where(
-                    'username',
+                    'price',
                     isGreaterThanOrEqualTo: searchController.text,
                   )
                   .get(),

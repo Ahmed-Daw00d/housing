@@ -24,6 +24,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String _bioController = "";
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  // ignore: non_constant_identifier_names
   Uint8List? _IdImage;
   bool _isLoading = false;
   @override
@@ -78,6 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
         _isLoading = false;
       });
       // navigate to the home screen
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
@@ -91,6 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
         _isLoading = false;
       });
       // show the error
+      // ignore: use_build_context_synchronously
       showSnackBar(res, context);
     }
   }
@@ -290,6 +293,14 @@ class _SignupScreenState extends State<SignupScreen> {
                       InkWell(
                           onTap: signUpUser,
                           child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              decoration: const ShapeDecoration(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4))),
+                                  color: Color.fromARGB(190, 237, 201, 175)),
                               child: _isLoading
                                   ? const Center(
                                       child: CircularProgressIndicator(
@@ -301,15 +312,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
-                                    ),
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              decoration: const ShapeDecoration(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4))),
-                                  color: Color.fromARGB(190, 237, 201, 175)))),
+                                    ))),
 
                       const SizedBox(
                         height: 40,
@@ -320,25 +323,25 @@ class _SignupScreenState extends State<SignupScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
                             child: const Text(
                               "if you have an account?",
                               style: TextStyle(
                                 fontSize: 16,
                               ),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 8),
                           ),
                           GestureDetector(
                               onTap: navigateToLogin,
                               child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
                                 child: const Text(
                                   " Log in.",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
                                 ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
                               ))
                         ],
                       ),
