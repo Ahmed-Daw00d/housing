@@ -114,23 +114,23 @@ class _PostCardState extends State<PostCard> {
           ),
           //Image section
           ////
-          GestureDetector(
-            onDoubleTap: () async {
-              await FirestoreMethods().likePost(
-                widget.snap['postId'],
-                user.uid,
-                widget.snap['likes'],
-              );
-              setState(() {
-                isLikeAnimating = true;
-              });
-            },
-            child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.35,
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+          Material(
+            borderRadius: BorderRadius.circular(40),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            color: blueColor,
+            elevation: 8,
+            child: InkWell(
+              splashColor: thirdColor,
+              /////
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) {
+                return Material(
+                  borderRadius: BorderRadius.circular(40),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  color: blueColor,
+                  elevation: 8,
+                  child: SizedBox(
+                      child: ListView(
                     children: [
                       Image.network(
                         widget.snap["postUrl"],
@@ -138,24 +138,27 @@ class _PostCardState extends State<PostCard> {
                         gaplessPlayback: true,
                         filterQuality: FilterQuality.high,
                       ),
-                      const SizedBox(
-                        child: Icon(Icons.east_rounded),
+                      const Divider(
+                        thickness: 2.5,
+                        color: thirdColor,
                       ),
                       //
                       Image.network(
                         widget.snap["postUrl2"],
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(
-                        child: Icon(Icons.east_rounded),
+                      const Divider(
+                        thickness: 2.5,
+                        color: thirdColor,
                       ),
                       //
                       Image.network(
                         widget.snap["postUrl3"],
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(
-                        child: Icon(Icons.east_rounded),
+                      const Divider(
+                        thickness: 2.5,
+                        color: thirdColor,
                       ),
                       //
                       Image.network(
@@ -163,8 +166,21 @@ class _PostCardState extends State<PostCard> {
                         fit: BoxFit.cover,
                       ),
                     ],
-                  ),
-                )),
+                  )),
+                );
+              })),
+              /////
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.35,
+                width: MediaQuery.of(context).size.width * 0.95,
+                child: Image.network(
+                  widget.snap['postUrl'],
+                  fit: BoxFit.cover,
+                  width: 200,
+                  height: 200,
+                ),
+              ),
+            ),
           ),
 ////
           //Like comment section
@@ -219,7 +235,7 @@ class _PostCardState extends State<PostCard> {
                   Icons.phone,
                 ),
               ),
-              Expanded(
+              /* Expanded(
                 child: Align(
                   alignment: Alignment.bottomRight,
                   child: IconButton(
@@ -229,7 +245,7 @@ class _PostCardState extends State<PostCard> {
                     ),
                   ),
                 ),
-              ),
+              ), */
               //
             ],
           ),
@@ -260,11 +276,7 @@ class _PostCardState extends State<PostCard> {
                       style: const TextStyle(color: mobileBackgroundColor),
                       children: [
                         TextSpan(
-                          text: ' ${widget.snap['username']}',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        TextSpan(
-                          text: " ${widget.snap["description"]} ",
+                          text: "الوصف:" " ${widget.snap["description"]} ",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -279,23 +291,23 @@ class _PostCardState extends State<PostCard> {
                       style: const TextStyle(color: mobileBackgroundColor),
                       children: [
                         TextSpan(
-                          text: ' ${widget.snap["neighborhood"]} ',
+                          text: "الحي:" ' ${widget.snap["neighborhood"]}\t\t ',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: " ${widget.snap["adjacent"]} ",
+                          text: "المجاوره:" " ${widget.snap["adjacent"]}\n ",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: " ${widget.snap['building']} ",
+                          text: "العماره:" " ${widget.snap['building']} \t\t",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: " ${widget.snap['apartment']} ",
+                          text: "الشقه:" " ${widget.snap['apartment']} \n",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: " ${widget.snap["price"]} ",
+                          text: "السعر:" " ${widget.snap["price"]} ",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -305,25 +317,26 @@ class _PostCardState extends State<PostCard> {
                 //
                 InkWell(
                   onTap: () {},
-                  child: Container(
-                    child: Text(
-                      "view all $commentlen comments",
-                      style: const TextStyle(
-                          fontSize: 16, color: mobileBackgroundColor),
-                    ),
-                  ),
-                ),
-                Container(
                   child: Text(
-                    DateFormat.yMMMd()
-                        .format(widget.snap['datePublished'].toDate()),
+                    "view all $commentlen comments",
                     style: const TextStyle(
                         fontSize: 16, color: mobileBackgroundColor),
                   ),
                 ),
+                Text(
+                  DateFormat.yMMMd()
+                      .format(widget.snap['datePublished'].toDate()),
+                  style: const TextStyle(
+                      fontSize: 16, color: mobileBackgroundColor),
+                ),
               ],
             ),
           ),
+          const Divider(
+            color: thirdColor,
+            height: 20,
+            thickness: 2.5,
+          )
         ],
       ),
     );
