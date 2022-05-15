@@ -257,7 +257,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       image: AssetImage(
                                           'assets/images/lessor.png')),
                                   label: const Text(
-                                    "lessor",
+                                    "owner",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),

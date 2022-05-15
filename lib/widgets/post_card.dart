@@ -222,7 +222,7 @@ class _PostCardState extends State<PostCard> {
                     await FlutterLaunch.launchWhatsapp(
                         phone: "+2${widget.snap['number']}",
                         message:
-                            "بكلم حضرتك بخصوص الشق المعروضع علي برنامج hosing");
+                            "بكلم حضرتك بخصوص الشق المعروضع علي برنامج housing");
                   },
                   icon: Image.asset('assets/images/7.png')),
               //

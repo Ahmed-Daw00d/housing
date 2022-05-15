@@ -206,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8),
                                 child: const Text(
-                                  " Forgot pass .",
+                                  " Forgot.",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
