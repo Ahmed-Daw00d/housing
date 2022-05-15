@@ -189,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 40,
                       ),
-//Transitioning to forgetpass
+                      //Transitioning to forgetpass
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
