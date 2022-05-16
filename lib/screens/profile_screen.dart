@@ -5,6 +5,7 @@ import 'package:housing/resources/auth_methods.dart';
 import 'package:housing/resources/firestore_methods.dart';
 import 'package:housing/screens/aboutUs.dart';
 import 'package:housing/screens/login_screen.dart';
+import 'package:housing/screens/update_prof.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:housing/utils/utils.dart';
 import 'package:housing/widgets/follow_button.dart';
@@ -87,7 +88,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 shrinkWrap: true,
                                 children: [
                                   TextButton.icon(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                fullscreenDialog: true,
+                                                builder: (context) =>
+                                                    UpdateProf()));
+                                      },
                                       icon: const Icon(Icons.edit_sharp),
                                       label: const Text("edit_profile")),
                                   //about us

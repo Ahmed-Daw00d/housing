@@ -235,18 +235,6 @@ class _PostCardState extends State<PostCard> {
                   Icons.phone,
                 ),
               ),
-              /* Expanded(
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.bookmark_border,
-                    ),
-                  ),
-                ),
-              ), */
-              //
             ],
           ),
           //Description and number of comments
