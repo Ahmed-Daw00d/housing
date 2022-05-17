@@ -1,4 +1,3 @@
-//import 'dart:html';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:housing/resources/auth_methods.dart';
@@ -24,7 +23,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String _bioController = "";
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
-  // ignore: non_constant_identifier_names
+
   Uint8List? _IdImage;
   bool _isLoading = false;
   @override

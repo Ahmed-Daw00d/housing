@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "797122427539",
-    "project_id": "housing-82acb",
-    "storage_bucket": "housing-82acb.appspot.com"
+    "project_number": "1064638998112",
+    "project_id": "housing-60e4f",
+    "storage_bucket": "housing-60e4f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:797122427539:android:c650a33e6ca024bb4dab66",
+        "mobilesdk_app_id": "1:1064638998112:android:b01be17307094c2c034505",
         "android_client_info": {
-          "package_name": "com.example.housing"
+          "package_name": "com.dawood.housing"
         }
       },
       "oauth_client": [
         {
-          "client_id": "797122427539-7hn7tb6fant9bs9ml5lefbrhv2ofu4uv.apps.googleusercontent.com",
+          "client_id": "1064638998112-lckpri19ltb3a8mpho4543uersp5fdne.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD6A_Aq4svVXgs_1FJCBNWyriXhZhEm7lY"
+          "current_key": "AIzaSyBsszouPFzS_GCzCjyNmNMZOCUxQvPM3dY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "797122427539-7hn7tb6fant9bs9ml5lefbrhv2ofu4uv.apps.googleusercontent.com",
+              "client_id": "1064638998112-lckpri19ltb3a8mpho4543uersp5fdne.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

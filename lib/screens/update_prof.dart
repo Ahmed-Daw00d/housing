@@ -217,11 +217,7 @@ class _UpdateProfState extends State<UpdateProf> {
                             } else {
                               showSnackBar("", context);
                             }
-                            if (_image != null) {
-                              FirestoreMethods().updateImage(user.uid, _image);
-                            } else {
-                              showSnackBar("", context);
-                            }
+
                             showSnackBar("تم التعديل ", context);
                             Navigator.of(context).pop();
                           },

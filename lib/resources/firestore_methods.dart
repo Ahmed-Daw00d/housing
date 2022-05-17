@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:housing/models/post.dart';
 import 'package:housing/resources/storage_methods.dart';
@@ -145,7 +143,7 @@ class FirestoreMethods {
     }
   }
 // update image Post
-  Future<void> updateImage(String uid, var data) async {
+  /* Future<void> updateImage(String uid, var data) async {
     try {
       await _firestore.collection("users").doc(uid).update({'photoUrl': data});
     } catch (e) {
@@ -153,7 +151,7 @@ class FirestoreMethods {
         e.toString(),
       );
     }
-  }
+  } */
 
   //
   Future<void> followUser(String uid, String followId) async {
