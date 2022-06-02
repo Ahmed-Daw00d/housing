@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:housing/resources/auth_methods.dart';
 import 'package:housing/responsive/mobile_screen-layout.dart';
 import 'package:housing/responsive/responsive_layout_screen.dart';
-import 'package:housing/responsive/web_screen_layout.dart';
 import 'package:housing/screens/forget_pass.dart';
 import 'package:housing/screens/signup_screen.dart';
 import 'package:housing/utils/colors.dart';
@@ -43,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
             mobileScreenLayout: MobileScreenLayout(),
-            webScreenLayout: WebScreenLayout(),
+            webScreenLayout: MobileScreenLayout(),
           ),
         ),
       );

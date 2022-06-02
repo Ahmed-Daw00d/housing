@@ -43,12 +43,12 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     User user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       body: PageView(
-        children: user.bio == 'lessor'
-            ? lessorHomeScreenItems
-            : studentHomeScreenItems,
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: onPageChanged,
+        children: user.bio == 'lessor'
+            ? lessorHomeScreenItems
+            : studentHomeScreenItems,
       ),
       bottomNavigationBar: user.bio == "lessor"
           ? BottomNavigationBar(

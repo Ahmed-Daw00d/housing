@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:housing/providers/user_provider.dart';
 import 'package:housing/responsive/mobile_screen-layout.dart';
 import 'package:housing/responsive/responsive_layout_screen.dart';
-import 'package:housing/responsive/web_screen_layout.dart';
 import 'package:housing/screens/login_screen.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +49,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
                 return const ResponsiveLayout(
-                    webScreenLayout: WebScreenLayout(),
+                    webScreenLayout: MobileScreenLayout(),
                     mobileScreenLayout: MobileScreenLayout());
               } else if (snapshot.hasError) {
                 return Center(
