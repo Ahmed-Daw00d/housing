@@ -50,6 +50,8 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   flutter_launch: ^0.3.0
   rename: ^2.0.1
+  firebase_crashlytics: ^2.8.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
