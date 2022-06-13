@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_performance/firebase_performance.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:housing/providers/user_provider.dart';
@@ -12,21 +16,27 @@ import 'package:provider/provider.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-        options: const FirebaseOptions(
-      apiKey: 'AIzaSyDDHLaATVhkSwIjtE3UTv50NM3BdAErR9M',
-      appId: "1:1064638998112:web:c50ff64796d43ab5034505",
-      messagingSenderId: "1064638998112",
-      projectId: "housing-60e4f",
-      storageBucket: "housing-60e4f.appspot.com",
-    ));
-  } else {
-    await Firebase.initializeApp();
-  }
-
-  runApp(const MyApp());
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    if (kIsWeb) {
+      await Firebase.initializeApp(
+          options: const FirebaseOptions(
+        apiKey: 'AIzaSyDDHLaATVhkSwIjtE3UTv50NM3BdAErR9M',
+        appId: "1:1064638998112:web:c50ff64796d43ab5034505",
+        messagingSenderId: "1064638998112",
+        projectId: "housing-60e4f",
+        storageBucket: "housing-60e4f.appspot.com",
+      ));
+    } else {
+      await Firebase.initializeApp();
+    }
+//FirebaseCrashlytics
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    FirebasePerformance.instance.app;
+    runApp(const MyApp());
+  },
+      ((error, stack) =>
+          FirebaseCrashlytics.instance.recordError(error, stack)));
 }
 
 class MyApp extends StatelessWidget {

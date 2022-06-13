@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:housing/utils/colors.dart';
 import 'package:housing/utils/global_variables.dart';
@@ -51,63 +52,40 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
             : studentHomeScreenItems,
       ),
       bottomNavigationBar: user.bio == "lessor"
-          ? BottomNavigationBar(
-              items: [
+          ? CurvedNavigationBar(
+              color: thirdColor,
+              height: 50,
+              backgroundColor: fourdColor,
+              items: <Widget>[
                 //0
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home,
-                      color: (_page == 0) ? blueColor : secondaryColor),
-                  label: "",
-                  backgroundColor: fourdColor,
-                ),
+                Icon(Icons.home,
+                    color: (_page == 0) ? blueColor : secondaryColor),
                 //1 add post
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.search,
-                      color: (_page == 1) ? blueColor : secondaryColor),
-                  label: "search",
-                  backgroundColor: fourdColor,
-                ),
+                Icon(Icons.search,
+                    color: (_page == 1) ? blueColor : secondaryColor),
                 //2
-
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person,
-                      color: (_page == 2) ? blueColor : secondaryColor),
-                  label: 'profile',
-                  backgroundColor: fourdColor,
-                ),
+                Icon(Icons.person,
+                    color: (_page == 2) ? blueColor : secondaryColor),
                 //3
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.add_circle,
-                      color: (_page == 3) ? blueColor : secondaryColor),
-                  label: "Add post",
-                  backgroundColor: fourdColor,
-                ),
+                Icon(Icons.add_circle,
+                    color: (_page == 3) ? blueColor : secondaryColor),
               ],
               onTap: navigationTapped,
             )
-          : BottomNavigationBar(
+          : CurvedNavigationBar(
+              color: thirdColor,
+              height: 50,
+              backgroundColor: fourdColor,
               items: [
                 //0
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home,
-                      color: (_page == 0) ? blueColor : secondaryColor),
-                  label: "",
-                  backgroundColor: fourdColor,
-                ),
+                Icon(Icons.home,
+                    color: (_page == 0) ? blueColor : secondaryColor),
                 //1 add post
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.search,
-                      color: (_page == 1) ? blueColor : secondaryColor),
-                  label: "search",
-                  backgroundColor: fourdColor,
-                ),
+                Icon(Icons.search,
+                    color: (_page == 1) ? blueColor : secondaryColor),
                 //2
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person,
-                      color: (_page == 2) ? blueColor : secondaryColor),
-                  label: 'profile',
-                  backgroundColor: fourdColor,
-                ),
+                Icon(Icons.person,
+                    color: (_page == 2) ? blueColor : secondaryColor),
               ],
               onTap: navigationTapped,
             ),
