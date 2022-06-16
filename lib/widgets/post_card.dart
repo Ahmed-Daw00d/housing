@@ -96,7 +96,8 @@ class _PostCardState extends State<PostCard> {
                                           .deletePost(widget.snap['postId']);
                                       Navigator.of(context).pop();
                                     } else {
-                                      showSnackBar("نعتذر انت لست صاحب المنشور",
+                                      showSnackBar(
+                                          "😊 نعتذر 👏 لكن انت لست صاحب المنشور",
                                           context);
                                     }
                                   },
