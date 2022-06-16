@@ -91,9 +91,14 @@ class _PostCardState extends State<PostCard> {
                               .map(
                                 (e) => InkWell(
                                   onTap: () async {
-                                    FirestoreMethods()
-                                        .deletePost(widget.snap['postId']);
-                                    Navigator.of(context).pop();
+                                    if (user.uid == widget.snap['uid']) {
+                                      FirestoreMethods()
+                                          .deletePost(widget.snap['postId']);
+                                      Navigator.of(context).pop();
+                                    } else {
+                                      showSnackBar("نعتذر انت لست صاحب المنشور",
+                                          context);
+                                    }
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
